@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hair_salon/screens/booking_screen.dart';
+import 'package:hair_salon/screens/gallery_screen.dart';
+import 'package:hair_salon/screens/profile_screen.dart';
 import 'package:hair_salon/widgets/barber_card.dart';
 import 'package:hair_salon/widgets/category_button.dart';
 import 'package:hair_salon/widgets/promotion_card.dart';
@@ -34,8 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _screens = [
       _buildHomeContent(),
       const BookingScreen(),
-      _buildShopContent(),
-      _buildProfileContent(),
+      const GalleryScreen(),
+      const ProfileScreen(),
     ];
   }
   
@@ -278,26 +280,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   
-  // Placeholder for Shop content
-  Widget _buildShopContent() {
-    return const Center(
-      child: Text(
-        'Shop Coming Soon',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
-    );
-  }
-  
-  // Placeholder for Profile content
-  Widget _buildProfileContent() {
-    return const Center(
-      child: Text(
-        'Profile Coming Soon',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      ),
-    );
-  }
-  
   // Add a list of services with their categories
   final List<Map<String, dynamic>> _services = [
     {
@@ -367,8 +349,8 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               _buildHomeContent(),
               const BookingScreen(),
-              _buildShopContent(),
-              _buildProfileContent(),
+              const GalleryScreen(),
+              const ProfileScreen(),
             ],
           ),
         ),
@@ -410,7 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   _selectedIndex = 2;
                 });
               },
-              child: _buildNavItem(Icons.shopping_bag_outlined, 'Shop', _selectedIndex == 2),
+              child: _buildNavItem(Icons.photo_library, 'Gallery', _selectedIndex == 2),
             ),
             GestureDetector(
               onTap: () {
