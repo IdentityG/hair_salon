@@ -26,7 +26,7 @@ class PromotionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 180.h,
+        // Remove fixed height to prevent bottom overflow
         margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
@@ -60,6 +60,7 @@ class PromotionCard extends StatelessWidget {
             
             // Gradient overlay
             Container(
+              height: 180.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16.r),
                 gradient: LinearGradient(
@@ -79,11 +80,12 @@ class PromotionCard extends StatelessWidget {
               padding: EdgeInsets.all(20.w),
               child: Row(
                 children: [
+                  // Limit width to prevent right overflow
                   Expanded(
                     flex: 3,
                     child: Column(
+                      mainAxisSize: MainAxisSize.min, // Use min size to prevent vertical overflow
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(
@@ -125,44 +127,51 @@ class PromotionCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(height: 10.h),
-                        Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8.w,
-                                vertical: 4.h,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: const Color(0xFFC19A6B),
-                                  width: 1.w,
+                        // Wrap with Flexible to handle overflow in the row
+                        Flexible(
+                          child: Row(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w,
+                                  vertical: 4.h,
                                 ),
-                                borderRadius: BorderRadius.circular(4.r),
-                              ),
-                              child: Text(
-                                code,
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFFC19A6B),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0xFFC19A6B),
+                                    width: 1.w,
+                                  ),
+                                  borderRadius: BorderRadius.circular(4.r),
+                                ),
+                                child: Text(
+                                  code,
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFFC19A6B),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              'Expires: ${expiryDate.day}/${expiryDate.month}/${expiryDate.year}',
-                              style: GoogleFonts.poppins(
-                                fontSize: 10.sp,
-                                color: Colors.white54,
+                              SizedBox(width: 8.w),
+                              Flexible(
+                                child: Text(
+                                  'Expires: ${expiryDate.day}/${expiryDate.month}/${expiryDate.year}',
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10.sp,
+                                    color: Colors.white54,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
+                  // Reduce the size of the empty space on the right
                   const Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: SizedBox(),
                   ),
                 ],
