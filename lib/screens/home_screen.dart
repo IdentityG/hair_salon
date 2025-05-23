@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hair_salon/screens/booking_screen.dart'; // Add this import
 import 'package:hair_salon/widgets/barber_card.dart';
 import 'package:hair_salon/widgets/category_button.dart';
 import 'package:hair_salon/widgets/promotion_card.dart';
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0; // Add this to track the selected tab
   int _selectedCategoryIndex = 0;
   final List<Map<String, dynamic>> _categories = [
     {'title': 'All', 'icon': Icons.grid_view_rounded},
@@ -338,10 +340,42 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(Icons.home_filled, 'Home', true),
-            _buildNavItem(Icons.calendar_today, 'Bookings', false),
-            _buildNavItem(Icons.shopping_bag_outlined, 'Shop', false),
-            _buildNavItem(Icons.person_outline, 'Profile', false),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+              child: _buildNavItem(Icons.home_filled, 'Home', _selectedIndex == 0),
+            ),
+            GestureDetector(
+              onTap: () {
+                // Navigate to the booking screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const BookingScreen(),
+                  ),
+                );
+              },
+              child: _buildNavItem(Icons.calendar_today, 'Bookings', _selectedIndex == 1),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                });
+              },
+              child: _buildNavItem(Icons.shopping_bag_outlined, 'Shop', _selectedIndex == 2),
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 3;
+                });
+              },
+              child: _buildNavItem(Icons.person_outline, 'Profile', _selectedIndex == 3),
+            ),
           ],
         ),
       ),
