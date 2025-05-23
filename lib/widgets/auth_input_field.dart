@@ -40,7 +40,7 @@ class _AuthInputFieldState extends State<AuthInputField> {
           style: GoogleFonts.poppins(
             fontSize: 14.sp,
             fontWeight: FontWeight.w500,
-            color: const Color(0xFF2D2D2D),
+            color: Colors.white,
           ),
         ),
         SizedBox(height: 8.h),
@@ -51,18 +51,18 @@ class _AuthInputFieldState extends State<AuthInputField> {
           validator: widget.validator,
           style: GoogleFonts.poppins(
             fontSize: 16.sp,
-            color: const Color(0xFF2D2D2D),
+            color: Colors.white,
           ),
           decoration: InputDecoration(
             hintText: widget.hintText,
             hintStyle: GoogleFonts.poppins(
               fontSize: 16.sp,
-              color: Colors.grey,
+              color: Colors.white38,
             ),
             filled: true,
-            fillColor: Colors.white,
+            fillColor: Colors.white.withOpacity(0.1),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.w,
+              horizontal: 16.w,
               vertical: 16.h,
             ),
             border: OutlineInputBorder(
@@ -71,37 +71,24 @@ class _AuthInputFieldState extends State<AuthInputField> {
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: widget.isError ? Colors.red : Colors.transparent,
-                width: 1.w,
-              ),
+              borderSide: widget.isError
+                  ? BorderSide(color: const Color(0xFFA63D40), width: 1.w)
+                  : BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: widget.isError ? Colors.red : const Color(0xFFE0B0B4),
-                width: 2.w,
-              ),
+              borderSide: BorderSide(color: const Color(0xFFC19A6B), width: 1.w),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 1.w,
-              ),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: Colors.red,
-                width: 2.w,
-              ),
+              borderSide: BorderSide(color: const Color(0xFFA63D40), width: 1.w),
             ),
             suffixIcon: widget.isPassword
                 ? IconButton(
                     icon: Icon(
                       _obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.grey,
+                      color: Colors.white54,
+                      size: 20.sp,
                     ),
                     onPressed: () {
                       setState(() {
@@ -110,23 +97,9 @@ class _AuthInputFieldState extends State<AuthInputField> {
                     },
                   )
                 : null,
-            errorStyle: GoogleFonts.poppins(
-              fontSize: 12.sp,
-              color: Colors.red,
-            ),
           ),
         ),
       ],
-    ).animate(
-      effects: widget.isError
-          ? [
-              ShakeEffect(
-                duration: 300.ms,
-                hz: 4,
-                curve: Curves.easeInOut,
-              ),
-            ]
-          : [],
     );
   }
 }

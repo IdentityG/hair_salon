@@ -27,18 +27,18 @@ class AuthButton extends StatelessWidget {
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: isPrimary
-              ? const Color(0xFFE0B0B4) // Rose gold
-              : Colors.white,
+              ? const Color(0xFFC19A6B) // Warm Brown/Amber
+              : Colors.transparent,
           foregroundColor: isPrimary
               ? Colors.white
-              : const Color(0xFF2D2D2D),
+              : Colors.white70,
           elevation: isPrimary ? 2 : 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
             side: isPrimary
                 ? BorderSide.none
                 : BorderSide(
-                    color: const Color(0xFFE0B0B4),
+                    color: const Color(0xFFC19A6B),
                     width: 1.w,
                   ),
           ),
@@ -49,23 +49,22 @@ class AuthButton extends StatelessWidget {
                 width: 24.w,
                 height: 24.h,
                 child: CircularProgressIndicator(
-                  color: isPrimary ? Colors.white : const Color(0xFFE0B0B4),
                   strokeWidth: 2.w,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    isPrimary ? Colors.white : const Color(0xFFC19A6B),
+                  ),
                 ),
               )
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (icon != null) ...[
-                    Icon(
-                      icon,
-                      size: 20.sp,
-                    ),
+                    Icon(icon, size: 20.sp),
                     SizedBox(width: 8.w),
                   ],
                   Text(
                     text,
-                    style: GoogleFonts.montserrat(
+                    style: GoogleFonts.poppins(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,
                     ),

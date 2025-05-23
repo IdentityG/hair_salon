@@ -77,8 +77,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFFFF8F0), // Cream
-                  Color(0xFFF8D0D3), // Blush pink
+                  Color(0xFF1A2A40), // Deep Navy Blue
+                  Color(0xFF2D3142), // Dark Charcoal
                 ],
               ),
             ),
@@ -98,7 +98,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           onPressed: () => Navigator.pop(context),
                           icon: Icon(
                             Icons.arrow_back_ios,
-                            color: const Color(0xFF2D2D2D),
+                            color: Colors.white,
                             size: 20.sp,
                           ),
                         )
@@ -106,6 +106,26 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         .fadeIn(duration: 500.ms),
                         
                         SizedBox(height: 30.h),
+                        
+                        // Header
+                        Text(
+                          'Reset Password',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 28.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
+                        
+                        SizedBox(height: 8.h),
+                        
+                        Text(
+                          'Create a new password',
+                          style: GoogleFonts.poppins(
+                            fontSize: 16.sp,
+                            color: Colors.white70,
+                          ),
+                        ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
                         
                         // Illustration
                         Center(

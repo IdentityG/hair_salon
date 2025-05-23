@@ -83,8 +83,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFFFF8F0), // Cream
-                  Color(0xFFF8D0D3), // Blush pink
+                  Color(0xFF1A2A40), // Deep Navy Blue
+                  Color(0xFF2D3142), // Dark Charcoal
                 ],
               ),
             ),
@@ -104,7 +104,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           onPressed: () => Navigator.pop(context),
                           icon: Icon(
                             Icons.arrow_back_ios,
-                            color: const Color(0xFF2D2D2D),
+                            color: Colors.white,
                             size: 20.sp,
                           ),
                         )
@@ -122,7 +122,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               borderRadius: BorderRadius.circular(20.r),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
+                                  color: Colors.black.withOpacity(0.3),
                                   blurRadius: 10,
                                   offset: const Offset(0, 5),
                                 ),
@@ -131,14 +131,14 @@ class _SignupScreenState extends State<SignupScreen> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(20.r),
                               child: Image.network(
-                                'https://img.freepik.com/free-vector/hair-salon-logo-template_23-2149373267.jpg',
+                                'https://img.freepik.com/free-vector/vintage-barber-shop-logo-template_23-2149420343.jpg',
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Container(
-                                    color: const Color(0xFFE0B0B4),
+                                    color: const Color(0xFFC19A6B),
                                     child: Center(
                                       child: Text(
-                                        'SALON',
+                                        'BARBER',
                                         style: GoogleFonts.montserrat(
                                           fontSize: 24.sp,
                                           fontWeight: FontWeight.bold,
@@ -151,15 +151,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               ),
                             ),
                           ),
-                        )
-                        .animate()
-                        .fadeIn(duration: 800.ms)
-                        .slideY(
-                          begin: 0.2,
-                          end: 0,
-                          duration: 800.ms,
-                          curve: Curves.easeOut,
-                        ),
+                        ).animate().fadeIn(duration: 600.ms),
                         
                         SizedBox(height: 30.h),
                         
@@ -283,7 +275,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 'I agree to the Terms of Service and Privacy Policy',
                                 style: GoogleFonts.poppins(
                                   fontSize: 12.sp,
-                                  color: const Color(0xFF2D2D2D),
+                                  color: const Color(0xFFF5F5F5),
                                 ),
                               ),
                             ),
@@ -320,7 +312,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               'Already have an account? ',
                               style: GoogleFonts.poppins(
                                 fontSize: 14.sp,
-                                color: const Color(0xFF2D2D2D),
+                                color: const Color(0xFFF5F5F5),
                               ),
                             ),
                             GestureDetector(

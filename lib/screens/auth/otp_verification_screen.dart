@@ -152,8 +152,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFFFFF8F0), // Cream
-                  Color(0xFFF8D0D3), // Blush pink
+                  Color(0xFF1A2A40), // Deep Navy Blue
+                  Color(0xFF2D3142), // Dark Charcoal
                 ],
               ),
             ),
@@ -171,7 +171,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         onPressed: () => Navigator.pop(context),
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: const Color(0xFF2D2D2D),
+                          color: Colors.white,
                           size: 20.sp,
                         ),
                       )
@@ -180,51 +180,26 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       
                       SizedBox(height: 30.h),
                       
-                      // Illustration
-                      Center(
-                        child: Container(
-                          width: 180.w,
-                          height: 180.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.r),
-                            child: Image.network(
-                              'https://img.freepik.com/free-vector/two-factor-authentication-concept-illustration_114360-5488.jpg',
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: const Color(0xFFE0B0B4),
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.sms,
-                                      size: 80.sp,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                      // Header
+                      Text(
+                        'Verification Code',
+                        style: GoogleFonts.montserrat(
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
-                      )
-                      .animate()
-                      .fadeIn(duration: 800.ms)
-                      .slideY(
-                        begin: 0.2,
-                        end: 0,
-                        duration: 800.ms,
-                        curve: Curves.easeOut,
-                      ),
+                      ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
                       
+                      SizedBox(height: 8.h),
+                      
+                      Text(
+                        'Enter the code sent to ${widget.emailOrPhone}',
+                        style: GoogleFonts.poppins(
+                          fontSize: 16.sp,
+                          color: Colors.white70,
+                        ),
+                      ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
+                            
                       SizedBox(height: 40.h),
                       
                       // Title
