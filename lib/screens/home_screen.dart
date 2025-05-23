@@ -22,7 +22,53 @@ class _HomeScreenState extends State<HomeScreen> {
     {'title': 'Shave', 'icon': Icons.spa},
     {'title': 'Color', 'icon': Icons.color_lens},
   ];
-
+  
+  // Add a list of services with their categories
+  final List<Map<String, dynamic>> _services = [
+    {
+      'name': 'Classic Haircut',
+      'price': 25,
+      'duration': 30,
+      'category': 'Haircut',
+      'imageUrl': 'https://img.freepik.com/free-photo/male-hairdresser-serving-client-barbershop_1303-20861.jpg',
+    },
+    {
+      'name': 'Beard Trim',
+      'price': 15,
+      'duration': 20,
+      'category': 'Beard',
+      'imageUrl': 'https://img.freepik.com/free-photo/barber-styling-beard-client_23-2147773210.jpg',
+    },
+    {
+      'name': 'Hot Towel Shave',
+      'price': 30,
+      'duration': 45,
+      'category': 'Shave',
+      'imageUrl': 'https://img.freepik.com/free-photo/barber-using-towel-client-s-face_23-2147773209.jpg',
+    },
+    {
+      'name': 'Hair Coloring',
+      'price': 45,
+      'duration': 60,
+      'category': 'Color',
+      'imageUrl': 'https://img.freepik.com/free-photo/hairdresser-cutting-client-s-hair-barbershop_1303-20448.jpg',
+    },
+    {
+      'name': 'Fade Haircut',
+      'price': 30,
+      'duration': 35,
+      'category': 'Haircut',
+      'imageUrl': 'https://img.freepik.com/free-photo/young-man-barbershop-trimming-hair_1303-26254.jpg',
+    },
+    {
+      'name': 'Beard Styling',
+      'price': 20,
+      'duration': 25,
+      'category': 'Beard',
+      'imageUrl': 'https://img.freepik.com/free-photo/man-barbershop-salon-doing-haircut-beard-trim_1303-20932.jpg',
+    },
+  ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -270,52 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 // Services Grid
                 Padding(
                   padding: EdgeInsets.all(20.w),
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    mainAxisSpacing: 16.h,
-                    crossAxisSpacing: 16.w,
-                    childAspectRatio: 0.8,
-                    children: [
-                      ServiceCard(
-                        name: 'Classic Haircut',
-                        price: 25,
-                        duration: 30,
-                        imageUrl: 'https://img.freepik.com/free-photo/male-hairdresser-serving-client-barbershop_1303-20861.jpg',
-                        onTap: () {
-                          // Handle service selection
-                        },
-                      ),
-                      ServiceCard(
-                        name: 'Beard Trim',
-                        price: 15,
-                        duration: 20,
-                        imageUrl: 'https://img.freepik.com/free-photo/barber-styling-beard-client_23-2147773210.jpg',
-                        onTap: () {
-                          // Handle service selection
-                        },
-                      ),
-                      ServiceCard(
-                        name: 'Hot Towel Shave',
-                        price: 30,
-                        duration: 45,
-                        imageUrl: 'https://img.freepik.com/free-photo/barber-using-towel-client-s-face_23-2147773209.jpg',
-                        onTap: () {
-                          // Handle service selection
-                        },
-                      ),
-                      ServiceCard(
-                        name: 'Hair Coloring',
-                        price: 45,
-                        duration: 60,
-                        imageUrl: 'https://img.freepik.com/free-photo/hairdresser-cutting-client-s-hair-barbershop_1303-20448.jpg',
-                        onTap: () {
-                          // Handle service selection
-                        },
-                      ),
-                    ],
-                  ),
+                  child: _buildFilteredServicesGrid(),
                 ),
               ],
             ),
@@ -366,6 +367,53 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  // Method to filter and build the services grid
+  Widget _buildFilteredServicesGrid() {
+    // Filter services based on selected category
+    List<Map<String, dynamic>> filteredServices = _selectedCategoryIndex == 0
+        ? _services // Show all services if "All" is selected
+        : _services.where((service) => 
+            service['category'] == _categories[_selectedCategoryIndex]['title']).toList();
+    
+    // If no services match the filter, show a message
+    if (filteredServices.isEmpty) {
+      return Center(
+        child: Text(
+          'No services available in this category',
+          style: GoogleFonts.poppins(
+            fontSize: 14.sp,
+            color: Colors.white70,
+          ),
+        ),
+      );
+    }
+    
+    // Build grid with filtered services
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16.h,
+        crossAxisSpacing: 16.w,
+        childAspectRatio: 0.8,
+      ),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: filteredServices.length,
+      itemBuilder: (context, index) {
+        final service = filteredServices[index];
+        return ServiceCard(
+          name: service['name'],
+          price: service['price'],
+          duration: service['duration'],
+          imageUrl: service['imageUrl'],
+          onTap: () {
+            // Handle service selection
+          },
+        );
+      },
     );
   }
 }

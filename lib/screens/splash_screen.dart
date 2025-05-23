@@ -50,10 +50,10 @@ class _SplashScreenState extends State<SplashScreen> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFFE0B0B4), // Rose gold
-              Color(0xFFF8D0D3), // Blush pink
-              Color(0xFFFFF8F0), // Cream
-              Color(0xFF2D2D2D), // Soft black (at the bottom)
+              Color(0xFF1A2A40), // Deep Navy Blue
+              Color(0xFF2D3142), // Dark Charcoal
+              Color(0xFF1A2A40), // Deep Navy Blue
+              Color(0xFF2D3142), // Dark Charcoal
             ],
             stops: [0.0, 0.3, 0.7, 1.0],
           ),
@@ -78,14 +78,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
                 child: ClipOval(
                   child: Image.network(
-                    'https://via.placeholder.com/150?text=Salon',
+                    'https://via.placeholder.com/150?text=Barber',
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
-                        color: const Color(0xFFE0B0B4),
+                        color: const Color(0xFFC19A6B), // Warm Brown
                         child: Center(
                           child: Text(
-                            'SALON',
+                            'BARBER',
                             style: GoogleFonts.montserrat(
                               fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
@@ -111,10 +111,10 @@ class _SplashScreenState extends State<SplashScreen> {
               
               // Tagline
               Text(
-                'Beauty Begins Here',
-                style: GoogleFonts.poppins(
+                'Premium Grooming For Men',
+                style: GoogleFonts.montserrat(
                   fontSize: 24.sp,
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: Colors.white,
                   letterSpacing: 1.2,
                   shadows: [
@@ -138,30 +138,39 @@ class _SplashScreenState extends State<SplashScreen> {
               
               SizedBox(height: 10.h),
               
-              // Sparkle effect (simple implementation)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < 5; i++)
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 4.w),
-                      child: Icon(
-                        Icons.star,
-                        color: const Color(0xFFD4AF37), // Gold
-                        size: 12.sp,
-                      )
-                      .animate(
-                        onPlay: (controller) => controller.repeat(),
-                      )
-                      .fadeIn(delay: (300 + i * 100).ms)
-                      .shimmer(
-                        duration: 1200.ms,
-                        delay: (300 + i * 100).ms,
-                        color: Colors.white.withOpacity(0.8),
-                      ),
-                    ),
-                ],
+              // Accent line
+              Container(
+                width: 100.w,
+                height: 3.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFC19A6B), // Warm Brown
+                  borderRadius: BorderRadius.circular(2.r),
+                ),
+              )
+              .animate()
+              .fadeIn(delay: 500.ms, duration: 800.ms)
+              .slideX(
+                begin: 0.3,
+                end: 0,
+                delay: 500.ms,
+                duration: 800.ms,
+                curve: Curves.easeOut,
               ),
+              
+              SizedBox(height: 20.h),
+              
+              // Subtitle
+              Text(
+                'ESTABLISHED 2023',
+                style: GoogleFonts.poppins(
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.w500,
+                  color: const Color(0xFFC19A6B), // Warm Brown
+                  letterSpacing: 3.0,
+                ),
+              )
+              .animate()
+              .fadeIn(delay: 700.ms, duration: 800.ms),
             ],
           ),
         ),
